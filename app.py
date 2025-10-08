@@ -90,16 +90,16 @@ def main():
         type=['xlsx', 'xls'],
         help="Загрузите файл с данными для анализа"
     )
-    
-    # Загрузка примера данных по умолчанию
-    use_sample = st.sidebar.checkbox("Использовать примерные данные", value=True)
+
+    # Загрузка данных по умолчанию
+    use_sample = st.sidebar.checkbox("Использовать данные по умолчанию", value=True)
     
     if use_sample and uploaded_file is None:
         try:
             data = pd.read_excel("data/sverstal_data.xlsx")
-            st.sidebar.success("✅ Загружены примерные данные")
+            st.sidebar.success("✅ Загружены данные по умолчанию")
         except:
-            st.sidebar.error("❌ Примерные данные не найдены")
+            st.sidebar.error("❌ данные по умолчанию не найдены")
             data = None
     else:
         data = load_data(uploaded_file)
@@ -208,7 +208,7 @@ def main():
         if st.sidebar.button("🚀 Запустить анализ", type="primary"):
             perform_clustering_analysis(data, selected_features, analysis_num_col, cat_col, n_clusters)
     else:
-        st.info("👆 Загрузите файл данных или используйте примерные данные")
+        st.info("👆 Загрузите файл данных или используйте данные по умолчанию")
 
 def perform_clustering_analysis(data, selected_features, num_col, cat_col, n_clusters):
     """Выполнение кластерного анализа"""
@@ -335,13 +335,7 @@ def perform_clustering_analysis(data, selected_features, num_col, cat_col, n_clu
             ax.set_xlabel('Объекты/Кластеры', fontsize=12)
             ax.set_ylabel('Расстояние', fontsize=12)
             ax.grid(True, alpha=0.3, linestyle='--')
-            
-            # Добавляем горизонтальную линию для показа возможной точки отсечения
-            threshold = 0.7 * max(Z[:,2])
-            ax.axhline(y=threshold, color='red', linestyle='--', alpha=0.8, linewidth=2,
-                       label=f'Рекомендуемый порог: {threshold:.1f}')
-            ax.legend(fontsize=10)
-            
+                        
             # Улучшение внешнего вида
             plt.tight_layout()
             
@@ -355,8 +349,6 @@ def perform_clustering_analysis(data, selected_features, num_col, cat_col, n_clu
                 st.metric("Количество объектов", len(data))
             with col2:
                 st.metric("Максимальное расстояние", f"{max(Z[:,2]):.2f}")
-            with col3:
-                st.metric("Рекомендуемый порог", f"{threshold:.2f}")
         
         # t-SNE визуализация
         st.subheader("🗺️ Визуализация в пространстве признаков (t-SNE)")
