@@ -18,19 +18,19 @@ def run_streamlit_app():
         # Запуск Streamlit
         process = subprocess.Popen([
             sys.executable, "-m", "streamlit", "run", "app.py",
-            "--server.port", "8000",
+            "--server.port", "8501",
             "--server.address", "localhost"
         ])
         
         print("✅ Приложение запущено!")
-        print("🌐 Откройте браузер и перейдите по адресу: http://localhost:8400")
+        print("🌐 Откройте браузер и перейдите по адресу: http://localhost:8501")
         
         # Пауза для запуска сервера
         time.sleep(3)
         
         # Автоматическое открытие браузера
         try:
-            webbrowser.open("http://localhost:8400")
+            webbrowser.open("http://localhost:8501")
         except:
             print("❌ Не удалось автоматически открыть браузер")
         
