@@ -108,11 +108,13 @@ python run_app.py
 ## Структура проекта
 
 ```
-HierClust/
+ClusteringTest/
 ├── app.py                 # Основное Streamlit приложение
-├── requirements.txt       # Зависимости Python
-├── solution.ipynb        # Исходный Jupyter notebook с анализом
+├── solution.ipynb         # Исходный Jupyter notebook с анализом исходных данных 
 ├── data/
 │   └── sverstal_data.xlsx # Примерные данные
-└── README.md             # Документация
+├── utils.py               # Дополнительные утилиты для Streamlit приложения
+├── run_app.py             # Запуск приложения
+├── requirements.txt       # Зависимости Python
+└── README.md              # Документация
 ```
